@@ -1,0 +1,2 @@
+web: gunicorn idrink.wsgi
+
