@@ -148,6 +148,67 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 
+        <script type="text/javascript">
+            $( document ).ready(() => {
+                var mosquitto_host = "127.0.0.1"
+                var mosquitto_port = 9001
+
+                // Create a client instance
+                client = new Paho.MQTT.Client(mosquitto_host, mosquitto_port, "clientId");
+
+                // set callback handlers
+                client.onConnectionLost = onConnectionLost;
+                client.onMessageArrived = onMessageArrived;
+
+                // connect the client
+                client.connect({onSuccess:onConnect});
+
+
+                // called when the client connects
+                function onConnect() {
+                  // Once a connection has been made, make a subscription and send a message.
+                  console.log("onConnect");
+                  client.subscribe("World");
+                  message = new Paho.MQTT.Message("Hello");
+                  message.destinationName = "World";
+                  client.send(message);
+                }
+
+                // called when the client loses its connection
+                function onConnectionLost(responseObject) {
+                  if (responseObject.errorCode !== 0) {
+                    console.log("onConnectionLost:"+responseObject.errorMessage);
+                  }
+                }
+
+                // called when a message arrives
+                function onMessageArrived(message) {
+                  console.log("onMessageArrived:"+message.payloadString);
+                }
+
+            });
+            /*
+            # Place your local configuration in /etc/mosquitto/conf.d/
+            #
+            # A full description of the configuration file is at
+            # /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+
+            pid_file /var/run/mosquitto.pid
+
+            persistence true
+            persistence_location /var/lib/mosquitto/
+
+            #log_dest file /var/log/mosquitto/mosquitto.log
+
+            include_dir /etc/mosquitto/conf.d
+
+            port 1883
+            listener 9001
+            protocol websockets
+            /**/
+
+
+        </script>
 
 
 </body></html>
