@@ -1,4 +1,10 @@
 import paho.mqtt.client as mqtt
+import time
+
+# Configuration values
+pump_controller_id = 1
+pump_id = 1
+response_delay = 3
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -6,11 +12,14 @@ def on_connect(client, userdata, flags, rc):
 
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    client.subscribe("pumpcontroller")
+    client.subscribe("pumpcontroller/" + str(pump_controller_id) + "/" + str(pump_id))
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+    print("topic:" + msg.topic + "payload:"+str(msg.payload))
+    print("Replying message ...")
+    time.sleep(response_delay)
+    (rc, mid) = client.publish("pumpresponse", msg.topic + " terminated")
 
 client = mqtt.Client()
 client.on_connect = on_connect
