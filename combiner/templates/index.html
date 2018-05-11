@@ -150,7 +150,7 @@
 
         <script type="text/javascript">
             $( document ).ready(() => {
-                var mosquitto_host = "127.0.0.1"
+                var mosquitto_host = "localhost"
                 var mosquitto_port = 9001
 
                 // Create a client instance
@@ -169,8 +169,8 @@
                   // Once a connection has been made, make a subscription and send a message.
                   console.log("onConnect");
                   client.subscribe("World");
-                  message = new Paho.MQTT.Message("Hello");
-                  message.destinationName = "World";
+                  message = new Paho.MQTT.Message("pumpdata");
+                  message.destinationName = "pumpcontroller";
                   client.send(message);
                 }
 
