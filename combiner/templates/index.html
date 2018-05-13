@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div><!-- end row -->
-                    <div id="root" class="row"></div>
+                    <div id="root"></div>
 
                 </div><!-- end container -->
 
@@ -217,11 +217,8 @@
                   <div className="col-md-4">
                       <div className="text-center single-content">
                             <i className="fa fa-wifi"></i>
-                            <h3>Drink 689</h3>
-                            <p>
-                             Unordered list of ingredients
-                             probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                            </p>
+                            <h3>{this.props.name}</h3>
+                            <p>{this.props.description}</p>
                         </div>
                   </div>
                 )
@@ -232,9 +229,9 @@
               render() {
                 return (
                   <div className="row">
-                    <Drink />
-                    <Drink />
-                    <Drink />
+                    <Drink name="MyDrink1" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                    <Drink name="MyDrink2" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                    <Drink name="MyDrink3" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
                   </div>
                 )
               }
