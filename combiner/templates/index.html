@@ -60,7 +60,8 @@
                     </div>
                 </nav>
 
-            </header><!-- header --><section id="content-section7" class="content-section7">
+            </header><!-- header -->
+              <section id="content-section7" class="content-section7">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
@@ -130,8 +131,15 @@
                             </div>
                         </div>
                     </div><!-- end row -->
+                    <div id="root" class="row"></div>
+
                 </div><!-- end container -->
-            </section></div><!-- /#page -->
+
+
+            </section>
+
+
+          </div><!-- /#page -->
 
 
         <!--=== Load JS here for greater good ====-->
@@ -146,9 +154,10 @@
         <script src="{% static 'js/main.js' %}"></script>
 
 
+        <!-- MQTT -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-
         <script type="text/javascript">
+        /*
             $( document ).ready(() => {
                 var mosquitto_host = "localhost"
                 var mosquitto_port = 9001
@@ -188,8 +197,52 @@
                 }
 
             });
-
+            /**/
         </script>
 
+        <!-- React -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+        <script type="text/babel">
+            class Greeting extends React.Component {
+                render() {
+                    return (<p>Hello world</p>);
+                }
+            }
 
-</body></html>
+            class Drink extends React.Component {
+              render() {
+                return (
+                  <div className="col-md-4">
+                      <div className="text-center single-content">
+                            <i className="fa fa-wifi"></i>
+                            <h3>Drink 689</h3>
+                            <p>
+                             Unordered list of ingredients
+                             probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
+                            </p>
+                        </div>
+                  </div>
+                )
+              }
+            }
+
+            class DrinkRow extends React.Component {
+              render() {
+                return (
+                  <div className="row">
+                    <Drink />
+                    <Drink />
+                    <Drink />
+                  </div>
+                )
+              }
+            }
+
+            // Render Items
+            ReactDOM.render( <DrinkRow />, document.getElementById('root'));
+        </script>
+
+</body>
+</html>
