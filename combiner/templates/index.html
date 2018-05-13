@@ -63,7 +63,7 @@
             </header><!-- header -->
               <section id="content-section7" class="content-section7">
                 <div class="container">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-4">
                             <div class="text-center single-content">
                                 <i class="fa fa-code"></i>
@@ -216,7 +216,7 @@
                 return (
                   <div className="col-md-4">
                       <div className="text-center single-content">
-                            <i className="fa fa-wifi"></i>
+                            <i className={this.props.icon}></i>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
                         </div>
@@ -229,16 +229,29 @@
               render() {
                 return (
                   <div className="row">
-                    <Drink name="MyDrink1" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                    <Drink name="MyDrink2" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                    <Drink name="MyDrink3" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                    <Drink name="MyDrink1" icon="fa fa-wifi" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                    <Drink name="MyDrink2" icon="fa fa-glass" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                    <Drink name="MyDrink3" icon="fa fa-paint-brush" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
                   </div>
                 )
               }
             }
 
+            class DrinkMatrix extends React.Component {
+              render() {
+                return (
+                  <div className="container">
+                    <DrinkRow />
+                    <DrinkRow />
+                  </div>
+                )
+              }
+            }
+
+
             // Render Items
-            ReactDOM.render( <DrinkRow />, document.getElementById('root'));
+            //ReactDOM.render( <DrinkRow />, document.getElementById('root'));
+            ReactDOM.render( <DrinkMatrix />, document.getElementById('root'));
         </script>
 
 </body>
