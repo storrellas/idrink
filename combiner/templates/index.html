@@ -155,6 +155,7 @@
 
                 var pump_controller_id = 1
                 var pump_id = 1
+                var pumpclient_topic = "pumpclient/1/1"
 
                 // Create a client instance
                 client = new Paho.MQTT.Client(mosquitto_host, mosquitto_port, "clientId");
@@ -169,10 +170,17 @@
 
                 // called when the client connects
                 function onConnect() {
+
+                  var message = {}
+                  message["id"] =  Math.floor( (Math.random() * 10000) )
+                  message["time_count"] = 5
+                  message["sender"] = pumpclient_topic
+
                   // Once a connection has been made, make a subscription and send a message.
                   console.log("onConnect");
-                  client.subscribe("pumpresponse");
-                  message = new Paho.MQTT.Message("pumpdata");
+                  client.subscribe(pumpclient_topic);
+                  //message = new Paho.MQTT.Message("pumpdata");
+                  message = new Paho.MQTT.Message(JSON.stringify(message));
                   message.destinationName = "pumpcontroller/" + pump_controller_id + "/" + pump_id;
                   client.send(message);
                 }

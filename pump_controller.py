@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt
-import time
+import time,json
 
 # Configuration values
 pump_controller_id = 1
@@ -16,10 +16,27 @@ def on_connect(client, userdata, flags, rc):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print("topic:" + msg.topic + "payload:"+str(msg.payload))
+    print("topic:" + msg.topic + " payload:"+str(msg.payload))
     print("Replying message ...")
+
+    # Get sender
+    message_json = json.loads(msg.payload)
+    print(message_json['id'])
+    print(message_json['sender'])
+
+    # Simulate operation here
     time.sleep(response_delay)
-    (rc, mid) = client.publish("pumpresponse", msg.topic + " terminated")
+    print("Done!")
+
+    # Generate reply
+    reply_json = {}
+    reply_json['id'] = message_json['id']
+    reply_json['status'] = 'OK'
+
+    # Generate response
+    (rc, mid) = client.publish(message_json['sender'], msg.topic + " terminated")
+
+
 
 client = mqtt.Client()
 client.on_connect = on_connect
