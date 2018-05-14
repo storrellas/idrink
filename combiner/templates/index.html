@@ -29,7 +29,7 @@
 
         <div id="page" class="page">
 
-        <header class="header2" id="header2">
+          <header class="header2" id="header2">
 
                 <nav role="navigation" class="navbar navbar-default">
                     <div class="container">
@@ -61,83 +61,9 @@
                 </nav>
 
             </header><!-- header -->
-              <section id="content-section7" class="content-section7">
-                <div class="container">
-                    <!-- <div class="row">
-                        <div class="col-md-4">
-                            <div class="text-center single-content">
-                                <i class="fa fa-code"></i>
-                                <h3>Drink 1</h3>
-                                <p>
-                                     Unordered list of ingredients
-
-                                     probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center single-content">
-                                <i class="fa fa-flask"></i>
-                                <h3>Drink 2</h3>
-                                <p>
-                                     Unordered list of ingredients
-
-                                     probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center single-content">
-                                <i class="fa fa-database"></i>
-                                <h3>Drink 3</h3>
-                                <p>
-                                     Unordered list of ingredients
-
-                                     probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center single-content">
-                                <i class="fa fa-paint-brush"></i>
-                                <h3>Drink 4</h3>
-                                <p>
-                                     Unordered list of ingredients
-
-                                     probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center single-content">
-                                <i class="fa fa-glass"></i>
-                                <h3>Drink 5</h3>
-                                <p>
-                                     Unordered list of ingredients
-
-                                     probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center single-content">
-                                <i class="fa fa-wifi"></i>
-                                <h3>Drink 6</h3>
-                                <p>
-                                     Unordered list of ingredients
-
-                                     probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!-- end row -->
-                    <div id="root"></div>
-
-                </div><!-- end container -->
-
-
+            <section id="content-section7" class="content-section7">
+                  <div id="root"></div>
             </section>
-
 
           </div><!-- /#page -->
 
@@ -236,24 +162,29 @@
               }
             }
 
-            class DrinkRow extends React.Component {
-              render() {
-                return (
-                  <div className="row">
-                    <Drink name="MyDrink1" icon="fa fa-wifi" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                    <Drink name="MyDrink2" icon="fa fa-glass" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                    <Drink name="MyDrink3" icon="fa fa-paint-brush" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                  </div>
-                )
-              }
-            }
-
             class DrinkMatrix extends React.Component {
               render() {
+                var item_11 = <Drink name="MyDrink1" icon="fa fa-wifi" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                var item_12 = <Drink name="MyDrink2" icon="fa fa-glass" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                var item_13 = <Drink name="MyDrink3" icon="fa fa-paint-brush" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+
+                var item_21 = <Drink name="MyDrink4" icon="fa fa-wifi" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                var item_22 = <Drink name="MyDrink5" icon="fa fa-glass" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                var item_23 = <Drink name="MyDrink6" icon="fa fa-paint-brush" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+
                 return (
                   <div className="container">
-                    <DrinkRow />
-                    <DrinkRow />
+                    <div className="row">
+                      {item_11}
+                      {item_12}
+                      {item_13}
+                    </div>
+                    <div className="row">
+                      {item_21}
+                      {item_22}
+                      {item_23}
+                    </div>
+
                   </div>
                 )
               }
@@ -261,7 +192,6 @@
 
 
             // Render Items
-            //ReactDOM.render( <DrinkRow />, document.getElementById('root'));
             ReactDOM.render( <DrinkMatrix />, document.getElementById('root'));
         </script>
 
