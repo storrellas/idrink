@@ -62,10 +62,42 @@
 
             </header><!-- header -->
             <section id="content-section7" class="content-section7">
-                  <div id="root"></div>
+                <div id="root"></div>
+
+                <!-- Button -->
+                <div class="container">
+                  <div class="row text-center">
+                    <button type="button" class="btn btn-info"  data-toggle="modal" data-target="#exampleModal" style="font-weight:bold; font-size:20px; background-color: #38A5E0">
+                      Make Drink
+                    </button>
+                  </div>
+                </div>
             </section>
 
+
+
           </div><!-- /#page -->
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Introduce here the size of every ingredient
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
         <!--=== Load JS here for greater good ====-->
@@ -142,17 +174,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
         <script type="text/babel">
-            class Greeting extends React.Component {
-                render() {
-                    return (<p>Hello world</p>);
-                }
-            }
-
             class Drink extends React.Component {
+
+              handleClick() {
+                // Show modal dialog
+                $("#exampleModal").modal();
+              }
+
               render() {
                 return (
                   <div className="col-md-4">
-                      <div className="text-center single-content">
+                      <div className="text-center single-content" onClick={this.handleClick}>
                             <i className={this.props.icon}></i>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
@@ -188,7 +220,6 @@
                       {item_22}
                       {item_23}
                     </div>
-
                   </div>
                 )
               }
