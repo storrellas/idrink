@@ -164,13 +164,17 @@
 
             class DrinkMatrix extends React.Component {
               render() {
-                var item_11 = <Drink name="MyDrink1" icon="fa fa-wifi" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                var item_12 = <Drink name="MyDrink2" icon="fa fa-glass" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                var item_13 = <Drink name="MyDrink3" icon="fa fa-paint-brush" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
 
-                var item_21 = <Drink name="MyDrink4" icon="fa fa-wifi" description="Description for drink1 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                var item_22 = <Drink name="MyDrink5" icon="fa fa-glass" description="Description for drink2 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
-                var item_23 = <Drink name="MyDrink6" icon="fa fa-paint-brush" description="Description for drink3 probant an malis deserunt commodo labore labore do pariatur, concursionibus singulis multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."/>
+                var description = "Description for drink probant an malis deserunt " +
+                                  "commodo labore labore do pariatur, concursionibus singulis " +
+                                  "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
+                var item_11 = <Drink name="MyDrink1" icon="fa fa-bolt" description={description}/>
+                var item_12 = <Drink name="MyDrink2" icon="fa fa-cab" description={description}/>
+                var item_13 = <Drink name="MyDrink3" icon="fa fa-camera" description={description}/>
+
+                var item_21 = <Drink name="MyDrink4" icon="fa fa-wifi" description={description}/>
+                var item_22 = <Drink name="MyDrink5" icon="fa fa-glass" description={description}/>
+                var item_23 = <Drink name="MyDrink6" icon="fa fa-paint-brush" description={description}/>
 
                 return (
                   <div className="container">
