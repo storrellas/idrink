@@ -4,6 +4,7 @@ decorator==4.3.0
 dj-database-url==0.5.0
 Django==1.11.13
 django-heroku==0.3.1
+djangorestframework==3.8.2
 enum34==1.1.6
 gunicorn==19.8.1
 ipython==5.6.0
