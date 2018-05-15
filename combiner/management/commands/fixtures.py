@@ -10,11 +10,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Generate entities
         try:
-            beefeater = Ingredient(name='beefeater', description='this is description for beefeater').save()
-            dry_vermouth = Ingredient(name='dry_vermouth', description='this is description for dry_vermouth').save()
-            orange = Ingredient(name='orange', description='this is description for dry_vermouth').save()
+            beefeater = IngredientMongo(name='beefeater', description='this is description for beefeater').save()
+            dry_vermouth = IngredientMongo(name='dry_vermouth', description='this is description for dry_vermouth').save()
+            orange = IngredientMongo(name='orange', description='this is description for dry_vermouth').save()
 
-            drink = Drink( name="martini", description="this is a cool drink used among modernets", ingredient_list=[beefeater, dry_vermouth, orange]).save()
+            drink = DrinkMongo( name="martini", description="this is a cool drink used among modernets", ingredient_list=[beefeater, dry_vermouth, orange]).save()
         except:
             raise CommandError('Failed to create entities')
 
