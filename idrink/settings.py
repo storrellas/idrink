@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'combiner'
 ]
 
@@ -126,6 +127,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
      os.path.join(PROJECT_ROOT, 'static'),
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
 # mongoengine
 import mongoengine
