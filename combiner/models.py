@@ -25,8 +25,7 @@ class Drink(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=120)
 
-
 class DrinkIngredient(models.Model):
-    drink = models.ForeignKey(Drink)
+    drink = models.ForeignKey(Drink, related_name='ingredient_list')
     ingredient = models.ForeignKey(Ingredient)
     size = models.IntegerField()
