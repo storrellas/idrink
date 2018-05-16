@@ -63,15 +63,6 @@
             </header><!-- header -->
             <section id="content-section7" class="content-section7">
                 <div id="root"></div>
-
-                <!-- Button -->
-                <div class="container">
-                  <div class="row text-center">
-                    <button type="button" class="btn btn-info"  data-toggle="modal" data-target="#exampleModal" style="font-weight:bold; font-size:20px; background-color: #38A5E0">
-                      Make Drink
-                    </button>
-                  </div>
-                </div>
             </section>
 
 
@@ -169,6 +160,9 @@
             /**/
         </script>
 
+        <!-- SuperAgent -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.js"></script>
+
         <!-- React -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
@@ -182,9 +176,17 @@
               }
 
               render() {
+
+                var divStyle = {
+                  width: '100%',
+                  margin_left: 'auto',
+                  margin_right: 'auto',
+                  max_width: 'initial',
+                };
+
                 return (
                   <div className="col-md-4">
-                      <div className="text-center single-content" onClick={this.handleClick}>
+                      <div className="text-center single-content" onClick={this.handleClick} style={divStyle}>
                             <i className={this.props.icon}></i>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
@@ -195,39 +197,114 @@
             }
 
             class DrinkMatrix extends React.Component {
+
+              constructor(props){
+                super(props)
+                this.description = "Description for drink probant an malis deserunt " +
+                                   "commodo labore labore do pariatur, concursionibus singulis " +
+                                   "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
+                // this.item_11 = <Drink name="MyDrink1" icon="fa fa-bolt" description={this.description}/>
+                // this.item_12 = <Drink name="MyDrink2" icon="fa fa-wifi" description={this.description}/>
+                // this.item_13 = <Drink name="MyDrink3" icon="fa fa-paint-brush" description={this.description}/>
+                //
+                // this.item_21 = <Drink name="MyDrink4" icon="fa fa-camera" description={this.description}/>
+                // this.item_22 = <Drink name="MyDrink5" icon="fa fa-cab" description={this.description}/>
+                // this.item_23 = <Drink name="MyDrink6" icon="fa fa-bolt" description={this.description}/>
+
+                // this.item_11 = <Drink icon="fa fa-spinner fa-spin"/>
+                // this.item_12 = <Drink icon="fa fa-spinner fa-spin"/>
+                // this.item_13 = <Drink icon="fa fa-spinner fa-spin"/>
+                //
+                // this.item_21 = <Drink icon="fa fa-spinner fa-spin"/>
+                // this.item_22 = <Drink icon="fa fa-spinner fa-spin"/>
+                // this.item_23 = <Drink icon="fa fa-spinner fa-spin"/>
+
+                // List items in matrix
+                this.item_list_size = 6
+                this.item_list = []
+                for(var i = 0; i < this.item_list_size; i++)
+                  this.item_list.push(<Drink icon="fa fa-spinner fa-spin"/>)
+
+                this.state = {
+                  description : this.description
+                }
+
+              }
+
+              componentDidMount() {
+                superagent
+                  .get('/combiner/drink/')
+                  .send({ name: 'Manny', species: 'cat' })
+                  .set('X-API-Key', 'foobar')
+                  .set('Accept', 'application/json')
+                  .then((res) => {
+                     //console.log(JSON.stringify(res.body))
+                     res.body.forEach( (item) => {
+
+                          this.item_list[0] = <Drink name={item.name} icon="fa fa-bolt" description={item.description}/>
+                          this.item_list[1] = <Drink name={item.name} icon="fa fa-wifi" description={item.description}/>
+                          this.item_list[2] = <Drink name={item.name} icon="fa fa-paint-brush" description={item.description}/>
+
+                          this.item_list[3] = <Drink name={item.name} icon="fa fa-camera" description={item.description}/>
+                          this.item_list[4] = <Drink name={item.name} icon="fa fa-cab" description={item.description}/>
+                          this.item_list[5] = <Drink name={item.name} icon="fa fa-bolt" description={item.description}/>
+
+                     } );
+
+                     // Force render() to be called
+                     this.forceUpdate()
+
+                  });
+
+              }
+
               render() {
-
-                var description = "Description for drink probant an malis deserunt " +
-                                  "commodo labore labore do pariatur, concursionibus singulis " +
-                                  "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
-                var item_11 = <Drink name="MyDrink1" icon="fa fa-bolt" description={description}/>
-                var item_12 = <Drink name="MyDrink2" icon="fa fa-cab" description={description}/>
-                var item_13 = <Drink name="MyDrink3" icon="fa fa-camera" description={description}/>
-
-                var item_21 = <Drink name="MyDrink4" icon="fa fa-wifi" description={description}/>
-                var item_22 = <Drink name="MyDrink5" icon="fa fa-glass" description={description}/>
-                var item_23 = <Drink name="MyDrink6" icon="fa fa-paint-brush" description={description}/>
 
                 return (
                   <div className="container">
                     <div className="row">
-                      {item_11}
-                      {item_12}
-                      {item_13}
+                      {this.item_list[0]}
+                      {this.item_list[1]}
+                      {this.item_list[2]}
                     </div>
                     <div className="row">
-                      {item_21}
-                      {item_22}
-                      {item_23}
+                      {this.item_list[3]}
+                      {this.item_list[4]}
+                      {this.item_list[5]}
                     </div>
                   </div>
                 )
+
+/*
+                return (
+                  <div className="container">
+                    <div className="row">
+                      {this.item_11}
+                      {this.item_12}
+                      {this.item_13}
+                    </div>
+                    <div className="row">
+                      {this.item_21}
+                      {this.item_22}
+                      {this.item_23}
+                    </div>
+                  </div>
+                )
+/**/
               }
             }
 
 
             // Render Items
             ReactDOM.render( <DrinkMatrix />, document.getElementById('root'));
+
+            $( document ).ready(() => {
+              console.log("Before making request")
+
+
+
+            })
+
         </script>
 
 </body>

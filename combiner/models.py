@@ -19,11 +19,11 @@ class DrinkMongo(Document):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=120)
+    description = models.CharField(max_length=1024)
 
 class Drink(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=120)
+    description = models.CharField(max_length=1024)
 
 class DrinkIngredient(models.Model):
     drink = models.ForeignKey(Drink, related_name='ingredient_list')
