@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import random
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
@@ -20,6 +22,7 @@ class DrinkViewSet(viewsets.ViewSet):
     A simple ViewSet for listing or retrieving users.
     """
     def list(self, request):
-        queryset = Drink.objects.all()
+        queryset = Drink.objects.all()        
+        queryset = sorted(queryset, key=lambda x: random.random())
         serializer = DrinkSerializer(queryset, many=True)
         return Response(serializer.data)

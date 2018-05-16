@@ -179,11 +179,8 @@
 
                 var divStyle = {
                   width: '100%',
-                  margin_left: 'auto',
-                  margin_right: 'auto',
-                  max_width: 'initial',
+                  height: '35vh'
                 };
-
                 return (
                   <div className="col-md-4">
                       <div className="text-center single-content" onClick={this.handleClick} style={divStyle}>
@@ -193,6 +190,7 @@
                         </div>
                   </div>
                 )
+
               }
             }
 
@@ -203,21 +201,9 @@
                 this.description = "Description for drink probant an malis deserunt " +
                                    "commodo labore labore do pariatur, concursionibus singulis " +
                                    "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
-                // this.item_11 = <Drink name="MyDrink1" icon="fa fa-bolt" description={this.description}/>
-                // this.item_12 = <Drink name="MyDrink2" icon="fa fa-wifi" description={this.description}/>
-                // this.item_13 = <Drink name="MyDrink3" icon="fa fa-paint-brush" description={this.description}/>
-                //
-                // this.item_21 = <Drink name="MyDrink4" icon="fa fa-camera" description={this.description}/>
-                // this.item_22 = <Drink name="MyDrink5" icon="fa fa-cab" description={this.description}/>
-                // this.item_23 = <Drink name="MyDrink6" icon="fa fa-bolt" description={this.description}/>
+                // Fake icon list
+                this.icon_list = ["fa fa-bolt", "fa fa-wifi", "fa fa-paint-brush", "fa fa-camera", "fa fa-cab", "fa fa-bolt"]
 
-                // this.item_11 = <Drink icon="fa fa-spinner fa-spin"/>
-                // this.item_12 = <Drink icon="fa fa-spinner fa-spin"/>
-                // this.item_13 = <Drink icon="fa fa-spinner fa-spin"/>
-                //
-                // this.item_21 = <Drink icon="fa fa-spinner fa-spin"/>
-                // this.item_22 = <Drink icon="fa fa-spinner fa-spin"/>
-                // this.item_23 = <Drink icon="fa fa-spinner fa-spin"/>
 
                 // List items in matrix
                 this.item_list_size = 6
@@ -239,16 +225,9 @@
                   .set('Accept', 'application/json')
                   .then((res) => {
                      //console.log(JSON.stringify(res.body))
-                     res.body.forEach( (item) => {
-
-                          this.item_list[0] = <Drink name={item.name} icon="fa fa-bolt" description={item.description}/>
-                          this.item_list[1] = <Drink name={item.name} icon="fa fa-wifi" description={item.description}/>
-                          this.item_list[2] = <Drink name={item.name} icon="fa fa-paint-brush" description={item.description}/>
-
-                          this.item_list[3] = <Drink name={item.name} icon="fa fa-camera" description={item.description}/>
-                          this.item_list[4] = <Drink name={item.name} icon="fa fa-cab" description={item.description}/>
-                          this.item_list[5] = <Drink name={item.name} icon="fa fa-bolt" description={item.description}/>
-
+                     this.item_list = []
+                     res.body.forEach( (item, index) => {
+                        this.item_list.push(<Drink name={item.name} icon={this.icon_list[index]} description={item.description}/>)
                      } );
 
                      // Force render() to be called
@@ -259,7 +238,6 @@
               }
 
               render() {
-
                 return (
                   <div className="container">
                     <div className="row">
@@ -274,23 +252,6 @@
                     </div>
                   </div>
                 )
-
-/*
-                return (
-                  <div className="container">
-                    <div className="row">
-                      {this.item_11}
-                      {this.item_12}
-                      {this.item_13}
-                    </div>
-                    <div className="row">
-                      {this.item_21}
-                      {this.item_22}
-                      {this.item_23}
-                    </div>
-                  </div>
-                )
-/**/
               }
             }
 
