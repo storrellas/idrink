@@ -24,6 +24,7 @@ class Ingredient(models.Model):
 class Drink(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=1024)
+    image = models.URLField(max_length=512, default='')
 
 class DrinkIngredient(models.Model):
     drink = models.ForeignKey(Drink, related_name='ingredient_list')

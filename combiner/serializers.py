@@ -18,4 +18,4 @@ class DrinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Drink
-        fields = ('id', 'name','description', 'ingredient_list')
+        fields = ('id', 'name', 'description', 'image', 'ingredient_list')
