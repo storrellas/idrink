@@ -113,11 +113,6 @@
         <script type="text/babel">
             class Drink extends React.Component {
 
-              handleClick() {
-                // Show modal dialog
-                $("#drink_modal").modal();
-              }
-
               render() {
 
                 var imgStyle = {
@@ -128,6 +123,14 @@
 
                 return (
                   <div className="col-md-4">
+                      <div className="text-center single-content" onClick={this.props.onClick}>
+                        </div>
+                  </div>
+                )
+
+/*
+                return (
+                  <div className="col-md-4">
                       <div className="text-center single-content" onClick={this.handleClick}>
                             <img className="img-thumbnail" src={this.props.image} style={imgStyle}/>
                             <h3>{this.props.name}</h3>
@@ -135,7 +138,7 @@
                         </div>
                   </div>
                 )
-
+/**/
               }
             }
 
@@ -143,50 +146,50 @@
 
               constructor(props){
                 super(props)
-                this.description = "Description for drink probant an malis deserunt " +
-                                   "commodo labore labore do pariatur, concursionibus singulis " +
-                                   "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
 
                 // Default item list
-                this.item_list_size = 6
-                this.item_list = []
-                for(var i = 0; i < this.item_list_size; i++)
-                  this.item_list.push(<Drink icon="fa fa-spinner fa-spin"/>)
+                // this.item_list_size = 6
+                // this.item_list = []
+                // for(var i = 0; i < this.item_list_size; i++)
+                //   this.item_list.push(<Drink icon="fa fa-spinner fa-spin"/>)
+
+                this.handleClick = this.handleClick.bind(this);
 
               }
 
-              componentDidMount() {
-                superagent
-                  .get('/combiner/drink/?count=' + this.item_list_size)
-                  .send({ name: 'Manny', species: 'cat' })
-                  .set('X-API-Key', 'foobar')
-                  .set('Accept', 'application/json')
-                  .then((res) => {
-                     //console.log(JSON.stringify(res.body))
-                     this.item_list = []
-                     res.body.forEach( (item, index) => {
-                        this.item_list.push(<Drink name={item.name} image={item.image} description={item.description}/>)
-                     });
-
-                     // Force render() to be called
-                     this.forceUpdate()
-
-                  });
-
+              handleClick() {
+                $("#drink_modal").modal();
+                //console.log('Click happened');
               }
+
+              // componentDidMount() {
+              //   superagent
+              //     .get('/combiner/drink/?count=' + this.item_list_size)
+              //     .send({ name: 'Manny', species: 'cat' })
+              //     .set('X-API-Key', 'foobar')
+              //     .set('Accept', 'application/json')
+              //     .then((res) => {
+              //        //console.log(JSON.stringify(res.body))
+              //        this.item_list = []
+              //        res.body.forEach( (item, index) => {
+              //           this.item_list.push(<Drink name={item.name} image={item.image} description={item.description}/>)
+              //        });
+              //
+              //        // Force render() to be called
+              //        this.forceUpdate()
+              //
+              //     });
+              //
+              // }
 
               render() {
                 return (
                   <div className="container">
                     <div className="row">
-                      {this.item_list[0]}
-                      {this.item_list[1]}
-                      {this.item_list[2]}
+                      <Drink icon="fa fa-spinner fa-spin" onClick={this.handleClick}/>
+
                     </div>
                     <div className="row">
-                      {this.item_list[3]}
-                      {this.item_list[4]}
-                      {this.item_list[5]}
                     </div>
                   </div>
                 )
