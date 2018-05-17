@@ -65,9 +65,6 @@
             <section id="content-section7" class="content-section7">
                 <div id="root"></div>
             </section>
-
-
-
           </div><!-- /#page -->
 
           <!-- Modal -->
@@ -75,13 +72,14 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <h2 class="modal-title" id="drink_modal">Mojito</h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  Introduce here the size of every ingredient
+                  <img class="img-thumbnail" src="http://elronpremiumdevenezuela.com/wp-content/uploads/el_mojito.png" style="width:100%"/>
+                  <p>Learn how to make Mojitos with Jamie Oliver's Drinks Tube & Bacardi. Follow our step-by-step mojito recipe for a refreshing summer cocktail.</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -111,6 +109,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
         <script type="text/babel">
+
             class Drink extends React.Component {
 
               render() {
@@ -123,7 +122,7 @@
 
                 return (
                   <div className="col-md-4">
-                      <div className="text-center single-content" onClick={this.props.onClick}>
+                      <div className="text-center single-content" onClick={() => this.props.onClick(this.props.index)}>
                             <img className="img-thumbnail" src={this.props.image} style={imgStyle}/>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
@@ -146,9 +145,16 @@
                 this.item_list = []
                 for(var i = 0; i < this.item_list_size; i++)
                   this.item_list.push(<Drink icon="fa fa-spinner fa-spin" onClick={this.showModal}/>)
+
+                this.recipe_list = []
               }
 
-              showModal() {
+              showModal(index) {
+                // Generate modal
+                var item = this.recipe_list[index]
+                $("#drink_modal .modal-title").text(item.name);
+                $("#drink_modal .modal-body img").attr('src', item.image);
+                $("#drink_modal .modal-body p").text(item.description);
                 $("#drink_modal").modal();
               }
 
@@ -159,10 +165,15 @@
                   .set('X-API-Key', 'foobar')
                   .set('Accept', 'application/json')
                   .then((res) => {
-                     console.log(JSON.stringify(res.body))
+                     // console.log(JSON.stringify(res.body))
+
+                     // Store recipe list for latter use
+                     this.recipe_list = res.body
+
+                     // Clear item list and redo
                      this.item_list = []
                      res.body.forEach( (item, index) => {
-                        this.item_list.push(<Drink name={item.name} image={item.image} description={item.description} onClick={this.showModal}/>)
+                        this.item_list.push(<Drink index={index} name={item.name} image={item.image} description={item.description} onClick={this.showModal}/>)
                      });
 
                      // Force render() to be called
