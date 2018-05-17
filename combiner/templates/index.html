@@ -179,12 +179,19 @@
 
                 var divStyle = {
                   width: '100%',
-                  height: '35vh'
+                  //height: '35vh'
                 };
+
+                var imgStyle = {
+                  zIndex: "2",
+                  position: "relative",
+                  width: "200"
+                };
+
                 return (
                   <div className="col-md-4">
                       <div className="text-center single-content" onClick={this.handleClick} style={divStyle}>
-                            <i className={this.props.icon}></i>
+                            <img className="img-thumbnail" src="https://cdn.liquor.com/wp-content/uploads/2013/08/Dry-Martini.jpg" style={imgStyle}/>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
                         </div>
