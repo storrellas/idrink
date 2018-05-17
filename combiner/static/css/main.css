@@ -3022,6 +3022,7 @@
 
 .content-section7 .single-content{
     background: url('../images/header9.jpg') no-repeat scroll center top / cover ;
+    cursor:pointer;
 }
 
 .content-section7 .single-content:before{
@@ -3033,12 +3034,14 @@
     left: 0;
     z-index: 1;
     background-color:  rgba(1, 191, 134, 0.8);
+    cursor:pointer;
 }
 
 .content-section7 .single-content:hover{
     color: #fff;
     background-color: #01bf86;
     border-color: #fff;
+
 }
 
 .content-section7 .single-content:hover i{

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html><head>
         <meta charset="utf-8">
-        <title>Divider</title>
+        <title>iDrink</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Loading Bootstrap -->
@@ -23,7 +23,8 @@
           <script src="{% static 'js/html5shiv.js' %}"></script>
           <script src="{% static 'js/respond.min.js' %}"></script>
         <![endif]-->
-    <style></style></head>
+
+    </head>
     <body>
 
 
@@ -119,10 +120,6 @@
 
               render() {
 
-                var divStyle = {
-                  width: '100%'
-                };
-
                 var imgStyle = {
                   zIndex: "2",
                   position: "relative",
@@ -131,7 +128,7 @@
 
                 return (
                   <div className="col-md-4">
-                      <div className="text-center single-content" onClick={this.handleClick} style={divStyle}>
+                      <div className="text-center single-content" onClick={this.handleClick}>
                             <img className="img-thumbnail" src={this.props.image} style={imgStyle}/>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
