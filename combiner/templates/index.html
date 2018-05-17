@@ -70,7 +70,7 @@
           </div><!-- /#page -->
 
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -83,8 +83,8 @@
                   Introduce here the size of every ingredient
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Make Drink</button>
                 </div>
               </div>
             </div>
@@ -101,6 +101,106 @@
         <script src="{% static 'js/portfolio-custom1.js' %}"></script>
         <script src="{% static 'js/portfolio-custom2.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- SuperAgent -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.js"></script>
+
+        <!-- React -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+        <script type="text/babel">
+            class Drink extends React.Component {
+
+              handleClick() {
+                // Show modal dialog
+                $("#drink_modal").modal();
+              }
+
+              render() {
+
+                var divStyle = {
+                  width: '100%',
+                  height: '70vh'
+                };
+
+                var imgStyle = {
+                  zIndex: "2",
+                  position: "relative",
+                  width: "100%"
+                };
+
+                return (
+                  <div className="col-md-4">
+                      <div className="text-center single-content" onClick={this.handleClick} style={divStyle}>
+                            <img className="img-thumbnail" src={this.props.image} style={imgStyle}/>
+                            <h3>{this.props.name}</h3>
+                            <p>{this.props.description}</p>
+                        </div>
+                  </div>
+                )
+
+              }
+            }
+
+            class DrinkMatrix extends React.Component {
+
+              constructor(props){
+                super(props)
+                this.description = "Description for drink probant an malis deserunt " +
+                                   "commodo labore labore do pariatur, concursionibus singulis " +
+                                   "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
+
+                // Default item list
+                this.item_list_size = 6
+                this.item_list = []
+                for(var i = 0; i < this.item_list_size; i++)
+                  this.item_list.push(<Drink icon="fa fa-spinner fa-spin"/>)
+
+              }
+
+              componentDidMount() {
+                superagent
+                  .get('/combiner/drink/?count=' + this.item_list_size)
+                  .send({ name: 'Manny', species: 'cat' })
+                  .set('X-API-Key', 'foobar')
+                  .set('Accept', 'application/json')
+                  .then((res) => {
+                     //console.log(JSON.stringify(res.body))
+                     this.item_list = []
+                     res.body.forEach( (item, index) => {
+                        this.item_list.push(<Drink name={item.name} image={item.image} description={item.description}/>)
+                     });
+
+                     // Force render() to be called
+                     this.forceUpdate()
+
+                  });
+
+              }
+
+              render() {
+                return (
+                  <div className="container">
+                    <div className="row">
+                      {this.item_list[0]}
+                      {this.item_list[1]}
+                      {this.item_list[2]}
+                    </div>
+                    <div className="row">
+                      {this.item_list[3]}
+                      {this.item_list[4]}
+                      {this.item_list[5]}
+                    </div>
+                  </div>
+                )
+              }
+            }
+
+
+            // Render Items
+            ReactDOM.render( <DrinkMatrix />, document.getElementById('root'));
+        </script>
 
 
         <!-- MQTT -->
@@ -160,120 +260,6 @@
             /**/
         </script>
 
-        <!-- SuperAgent -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.js"></script>
-
-        <!-- React -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
-        <script type="text/babel">
-            class Drink extends React.Component {
-
-              handleClick() {
-                // Show modal dialog
-                $("#exampleModal").modal();
-              }
-
-              render() {
-
-                var divStyle = {
-                  width: '100%',
-                  height: '70vh'
-                };
-
-                var imgStyle = {
-                  zIndex: "2",
-                  position: "relative",
-                  width: "100%"
-                };
-
-                return (
-                  <div className="col-md-4">
-                      <div className="text-center single-content" onClick={this.handleClick} style={divStyle}>
-                            <img className="img-thumbnail" src={this.props.image} style={imgStyle}/>
-                            <h3>{this.props.name}</h3>
-                            <p>{this.props.description}</p>
-                        </div>
-                  </div>
-                )
-
-              }
-            }
-
-            class DrinkMatrix extends React.Component {
-
-              constructor(props){
-                super(props)
-                this.description = "Description for drink probant an malis deserunt " +
-                                   "commodo labore labore do pariatur, concursionibus singulis " +
-                                   "multos consequat. Nostrud anim eiusmod, ita aliqua fabulas."
-                // Fake icon list
-                this.icon_list = ["fa fa-bolt", "fa fa-wifi", "fa fa-paint-brush", "fa fa-camera", "fa fa-cab", "fa fa-bolt"]
-
-
-                // List items in matrix
-                this.item_list_size = 6
-                this.item_list = []
-                for(var i = 0; i < this.item_list_size; i++)
-                  this.item_list.push(<Drink icon="fa fa-spinner fa-spin"/>)
-
-                this.state = {
-                  description : this.description
-                }
-
-              }
-
-              componentDidMount() {
-                superagent
-                  .get('/combiner/drink/')
-                  .send({ name: 'Manny', species: 'cat' })
-                  .set('X-API-Key', 'foobar')
-                  .set('Accept', 'application/json')
-                  .then((res) => {
-                     //console.log(JSON.stringify(res.body))
-                     this.item_list = []
-                     res.body.forEach( (item, index) => {
-                        this.item_list.push(<Drink name={item.name} image={item.image} description={item.description}/>)
-                     } );
-
-                     // Force render() to be called
-                     this.forceUpdate()
-
-                  });
-
-              }
-
-              render() {
-                return (
-                  <div className="container">
-                    <div className="row">
-                      {this.item_list[0]}
-                      {this.item_list[1]}
-                      {this.item_list[2]}
-                    </div>
-                    <div className="row">
-                      {this.item_list[3]}
-                      {this.item_list[4]}
-                      {this.item_list[5]}
-                    </div>
-                  </div>
-                )
-              }
-            }
-
-
-            // Render Items
-            ReactDOM.render( <DrinkMatrix />, document.getElementById('root'));
-
-            $( document ).ready(() => {
-              console.log("Before making request")
-
-
-
-            })
-
-        </script>
 
 </body>
 </html>

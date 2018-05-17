@@ -22,7 +22,9 @@ class DrinkViewSet(viewsets.ViewSet):
     A simple ViewSet for listing or retrieving users.
     """
     def list(self, request):
-        queryset = Drink.objects.all()        
+
+        count = self.request.query_params.get('count')
+        queryset = Drink.objects.all()[:count]  # Limiting number of elements if any
         queryset = sorted(queryset, key=lambda x: random.random())
         serializer = DrinkSerializer(queryset, many=True)
         return Response(serializer.data)
