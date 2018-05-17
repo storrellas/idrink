@@ -124,21 +124,12 @@
                 return (
                   <div className="col-md-4">
                       <div className="text-center single-content" onClick={this.props.onClick}>
-                        </div>
-                  </div>
-                )
-
-/*
-                return (
-                  <div className="col-md-4">
-                      <div className="text-center single-content" onClick={this.handleClick}>
                             <img className="img-thumbnail" src={this.props.image} style={imgStyle}/>
                             <h3>{this.props.name}</h3>
                             <p>{this.props.description}</p>
                         </div>
                   </div>
                 )
-/**/
               }
             }
 
@@ -147,49 +138,52 @@
               constructor(props){
                 super(props)
 
+                // Create property to be passed to
+                this.showModal = this.showModal.bind(this);
+
                 // Default item list
-                // this.item_list_size = 6
-                // this.item_list = []
-                // for(var i = 0; i < this.item_list_size; i++)
-                //   this.item_list.push(<Drink icon="fa fa-spinner fa-spin"/>)
-
-                this.handleClick = this.handleClick.bind(this);
-
+                this.item_list_size = 6
+                this.item_list = []
+                for(var i = 0; i < this.item_list_size; i++)
+                  this.item_list.push(<Drink icon="fa fa-spinner fa-spin" onClick={this.showModal}/>)
               }
 
-              handleClick() {
+              showModal() {
                 $("#drink_modal").modal();
-                //console.log('Click happened');
               }
 
-              // componentDidMount() {
-              //   superagent
-              //     .get('/combiner/drink/?count=' + this.item_list_size)
-              //     .send({ name: 'Manny', species: 'cat' })
-              //     .set('X-API-Key', 'foobar')
-              //     .set('Accept', 'application/json')
-              //     .then((res) => {
-              //        //console.log(JSON.stringify(res.body))
-              //        this.item_list = []
-              //        res.body.forEach( (item, index) => {
-              //           this.item_list.push(<Drink name={item.name} image={item.image} description={item.description}/>)
-              //        });
-              //
-              //        // Force render() to be called
-              //        this.forceUpdate()
-              //
-              //     });
-              //
-              // }
+              componentDidMount() {
+                superagent
+                  .get('/combiner/drink/?count=' + this.item_list_size)
+                  .send({ name: 'Manny', species: 'cat' })
+                  .set('X-API-Key', 'foobar')
+                  .set('Accept', 'application/json')
+                  .then((res) => {
+                     console.log(JSON.stringify(res.body))
+                     this.item_list = []
+                     res.body.forEach( (item, index) => {
+                        this.item_list.push(<Drink name={item.name} image={item.image} description={item.description} onClick={this.showModal}/>)
+                     });
+
+                     // Force render() to be called
+                     this.forceUpdate()
+
+                  });
+
+              }
 
               render() {
                 return (
                   <div className="container">
                     <div className="row">
-                      <Drink icon="fa fa-spinner fa-spin" onClick={this.handleClick}/>
-
+                      {this.item_list[0]}
+                      {this.item_list[1]}
+                      {this.item_list[2]}
                     </div>
                     <div className="row">
+                      {this.item_list[3]}
+                      {this.item_list[4]}
+                      {this.item_list[5]}
                     </div>
                   </div>
                 )
