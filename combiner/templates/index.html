@@ -243,14 +243,11 @@
                 this.drink.name = item.name
                 this.drink.image = item.image
                 this.drink.description = item.description
-                var ingredient_array = []
                 this.drink.ingredient_list = []
                 item.ingredient_list.forEach( (item, index) => {
                   var text = item.size + ' ml of ' + item.name
-                  ingredient_array.push(text)
+                  this.drink.ingredient_list.push(<li key={index}>{text}</li>)
                 });
-
-                this.drink.ingredient_list.map( (item) => <li>{item}</li>)
 
                 // Re-reder component
                 this.forceUpdate()
