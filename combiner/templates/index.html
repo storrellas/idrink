@@ -154,7 +154,7 @@
 
               render() {
                 return (
-                  <div className="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div className="modal fade" id="drink_modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
@@ -247,8 +247,10 @@
                 this.drink.ingredient_list = []
                 item.ingredient_list.forEach( (item, index) => {
                   var text = item.size + ' ml of ' + item.name
-                  this.drink.ingredient_list.push( <li>{text}</li>)
+                  ingredient_array.push(text)
                 });
+
+                this.drink.ingredient_list.map( (item) => <li>{item}</li>)
 
                 // Re-reder component
                 this.forceUpdate()
