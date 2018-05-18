@@ -1,0 +1,236 @@
+[
+{
+  "model": "combiner.ingredient",
+  "pk": 1,
+  "fields": {
+    "name": "Beefeater",
+    "size": 21,
+    "drink": 1
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 2,
+  "fields": {
+    "name": "Dry Vermouth",
+    "size": 23,
+    "drink": 1
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 3,
+  "fields": {
+    "name": "Bitter Orange",
+    "size": 41,
+    "drink": 1
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 4,
+  "fields": {
+    "name": "Tequila",
+    "size": 21,
+    "drink": 2
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 5,
+  "fields": {
+    "name": "Freshly squeezed lime juice",
+    "size": 23,
+    "drink": 2
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 6,
+  "fields": {
+    "name": "Orange liqueur",
+    "size": 41,
+    "drink": 2
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 7,
+  "fields": {
+    "name": "Sugar",
+    "size": 41,
+    "drink": 2
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 8,
+  "fields": {
+    "name": "Simple Sirope",
+    "size": 2,
+    "drink": 3
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 9,
+  "fields": {
+    "name": "Lemon juice",
+    "size": 34,
+    "drink": 3
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 10,
+  "fields": {
+    "name": "Angoustura Bitters",
+    "size": 21,
+    "drink": 3
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 11,
+  "fields": {
+    "name": "Superfine sugar",
+    "size": 2,
+    "drink": 4
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 12,
+  "fields": {
+    "name": "Crushed ice",
+    "size": 34,
+    "drink": 4
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 13,
+  "fields": {
+    "name": "White rum",
+    "size": 21,
+    "drink": 4
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 14,
+  "fields": {
+    "name": "Club soda",
+    "size": 2,
+    "drink": 4
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 15,
+  "fields": {
+    "name": "Creme de cassis",
+    "size": 2,
+    "drink": 5
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 16,
+  "fields": {
+    "name": "Lemon juice",
+    "size": 34,
+    "drink": 5
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 17,
+  "fields": {
+    "name": "Prosecco",
+    "size": 21,
+    "drink": 5
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 18,
+  "fields": {
+    "name": "Ginger ale",
+    "size": 2,
+    "drink": 6
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 19,
+  "fields": {
+    "name": "Brandy",
+    "size": 34,
+    "drink": 6
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 20,
+  "fields": {
+    "name": "Vodka",
+    "size": 2,
+    "drink": 7
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 21,
+  "fields": {
+    "name": "Tomato juice",
+    "size": 34,
+    "drink": 7
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 22,
+  "fields": {
+    "name": "Tabasco",
+    "size": 21,
+    "drink": 7
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 23,
+  "fields": {
+    "name": "Worcestershire Sauce",
+    "size": 21,
+    "drink": 7
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 24,
+  "fields": {
+    "name": "Thite rum",
+    "size": 2,
+    "drink": 8
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 25,
+  "fields": {
+    "name": "Lime juice",
+    "size": 34,
+    "drink": 8
+  }
+},
+{
+  "model": "combiner.ingredient",
+  "pk": 26,
+  "fields": {
+    "name": "Simple syrup",
+    "size": 21,
+    "drink": 8
+  }
+}
+]

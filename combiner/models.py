@@ -17,16 +17,12 @@ class DrinkMongo(Document):
     ingredient_list = fields.ListField(fields.ReferenceField(Ingredient))
 """
 
-class Ingredient(models.Model):
-    name = models.CharField(max_length=30)
-    description = models.CharField(max_length=1024)
-
 class Drink(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=1024)
     image = models.URLField(max_length=512, default='')
 
-class DrinkIngredient(models.Model):
-    drink = models.ForeignKey(Drink, related_name='ingredient_list')
-    ingredient = models.ForeignKey(Ingredient)
+class Ingredient(models.Model):
+    name = models.CharField(max_length=30)
     size = models.IntegerField()
+    drink = models.ForeignKey(Drink, related_name='ingredient_list')

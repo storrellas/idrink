@@ -1,29 +1,5 @@
 [
 {
-  "model": "combiner.ingredient",
-  "pk": 1,
-  "fields": {
-    "name": "Beefeater",
-    "description": "Beefeater description"
-  }
-},
-{
-  "model": "combiner.ingredient",
-  "pk": 2,
-  "fields": {
-    "name": "Dry Vermouth",
-    "description": "Dry Vermouth description"
-  }
-},
-{
-  "model": "combiner.ingredient",
-  "pk": 3,
-  "fields": {
-    "name": "Bitter Orange",
-    "description": "Bitter Orange description"
-  }
-},
-{
   "model": "combiner.drink",
   "pk": 1,
   "fields": {
@@ -81,45 +57,18 @@
   "model": "combiner.drink",
   "pk": 7,
   "fields": {
-    "name": "Christmas Alexander",
-    "description": "Drinks don't get more decadent than this brandy cocktail with crème de cacao and cream",
-    "image" : "https://www.businessinsider.in/photo/56137314/five-christmas-cocktails-to-add-merry-to-your-christmas/vanilla-eggnog.jpg"
+    "name": "Bloody Mary",
+    "description": "The Bloody Mary was invented in the 1920s or 1930s; there are various theories as to the origin of the drink, as well as the origin of its name.",
+    "image" : "https://search.chow.com/thumbnail/800/600/www.chowstatic.com/assets/recipe_photos/28166_bloody_mary_pickled_prawn.jpg"
   }
 },
 {
   "model": "combiner.drink",
   "pk": 8,
   "fields": {
-    "name": "Grappino",
-    "description": "Grappa and coffee is a staple in Italy, but even better shaken and chilled with some amaretto too",
-    "image" : "https://www.flairprojectsb.com/wp-content/uploads/2017/07/kaffir-lime-cocktail-800x600.jpg"
-  }
-},
-{
-  "model": "combiner.drinkingredient",
-  "pk": 1,
-  "fields": {
-    "drink": 1,
-    "ingredient": 1,
-    "size": 200
-  }
-},
-{
-  "model": "combiner.drinkingredient",
-  "pk": 2,
-  "fields": {
-    "drink": 1,
-    "ingredient": 2,
-    "size": 150
-  }
-},
-{
-  "model": "combiner.drinkingredient",
-  "pk": 3,
-  "fields": {
-    "drink": 1,
-    "ingredient": 3,
-    "size": 50
+    "name": "Daiquiri",
+    "description": "The daiquiri is one of the six basic drinks listed in David A. Embury's classic The Fine Art of Mixing Drinks, which also lists some variations.",
+    "image" : "https://search.chow.com/thumbnail/800/600/www.chowstatic.com/assets/models/promotions/photos/29174/original/blacktail-perfect-daiquiri-cocktail-2-chowhound.jpg"
   }
 }
 ]

@@ -25,6 +25,23 @@
         <![endif]-->
 
     </head>
+
+    <style type="text/css">
+      .modal li {
+          display: block;
+      }
+
+      .modal li:before {
+          /*Using a Bootstrap glyphicon as the bullet point*/
+          content: "\e013";
+          font-family: 'Glyphicons Halflings';
+          font-size: 9px;
+          float: left;
+          margin-top: 4px;
+          margin-left: -17px;
+      }
+    </style>
+
     <body>
 
 
@@ -67,13 +84,14 @@
             </section>
           </div><!-- /#page -->
 
+
           <!-- Modal -->
           <div class="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h2 class="modal-title" id="drink_modal">Mojito</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <h2 class="modal-title" id="drink_modal" style="display:inline"></h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:30px">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -85,6 +103,10 @@
                           </div>
                            <div class="col-md-6">
                                <p></p>
+                               <ul>
+                                 <li>Dry Vermouth</li>
+                                 <li>Bitter Orange</li>
+                               </ul>
                            </div>
                        </div>
                    </div>
@@ -128,8 +150,7 @@
 
                 var imgStyle = {
                   zIndex: "2",
-                  position: "relative",
-                  width: "100%"
+                  position: "relative"
                 };
 
                 return (
@@ -165,9 +186,17 @@
               showModal(index) {
                 // Generate modal
                 var item = this.recipe_list[index]
+
+
+                console.log("ITEM -> " + JSON.stringify(item))
+
                 $("#drink_modal .modal-title").text(item.name);
                 $("#drink_modal .modal-body img").attr('src', item.image);
                 $("#drink_modal .modal-body p").text(item.description);
+                $("#drink_modal .modal-body ul").empty();
+                item.ingredient_list.forEach( (item, index) => {
+                   $("#drink_modal .modal-body ul").append('<li>' + item.size + ' ml of ' + item.name + '</li>');
+                });
                 $("#drink_modal").modal();
               }
 
