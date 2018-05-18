@@ -109,7 +109,7 @@
             font-size: 30px;
           }
           .modal .modal-footer button{
-            width: 15%;
+            width: 150px;
           }
         </style>
 
@@ -129,7 +129,6 @@
               constructor(props){
                 super(props)
 
-
                 // Create property to be passed to
                 this.drink_start_handler = this.drink_start_handler.bind(this);
                 this.drink_done_handler = this.drink_done_handler.bind(this);
@@ -137,9 +136,11 @@
                   drink_generation : this.props.drink_generation
                 }
 
-
               }
-
+              componentWillReceiveProps(nextProps){
+                console.log("componentWillReceiveProps" + JSON.stringify(nextProps))
+                this.state.drink_generation = DrinkProgressEnum.PENDING
+              }
 
               drink_start_handler(){
                 this.setState({
@@ -253,6 +254,7 @@
                   description : "MyDescription",
                   ingredient_list : []
                 }
+
               }
 
               showModal(index) {
@@ -306,9 +308,6 @@
 
               render() {
 
-                console.log("Rerednd -->")
-                var drink_generation = DrinkProgressEnum.PENDING
-
                 return (
                   <div className="container">
                     <div className="row">
@@ -324,8 +323,7 @@
                     <DrinkDetail name={this.drink.name}
                                  image={this.drink.image}
                                  description={this.drink.description}
-                                 ingredient_list={this.drink.ingredient_list}
-                                 drink_generation={drink_generation} />
+                                 ingredient_list={this.drink.ingredient_list}/>
                   </div>
                 )
               }
