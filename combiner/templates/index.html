@@ -26,21 +26,7 @@
 
     </head>
 
-    <style type="text/css">
-      .modal li {
-          display: block;
-      }
 
-      .modal li:before {
-          /*Using a Bootstrap glyphicon as the bullet point*/
-          content: "\e013";
-          font-family: 'Glyphicons Halflings';
-          font-size: 9px;
-          float: left;
-          margin-top: 4px;
-          margin-left: -17px;
-      }
-    </style>
 
     <body>
 
@@ -86,7 +72,7 @@
 
 
           <!-- Modal -->
-          <div class="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- <div class="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -116,7 +102,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
 
         <!--=== Load JS here for greater good ====-->
@@ -133,16 +119,81 @@
         <!-- SuperAgent -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.js"></script>
 
+        <style type="text/css">
+          .modal li {
+              display: block;
+          }
+
+          .modal li:before {
+              /*Using a Bootstrap glyphicon as the bullet point*/
+              content: "\e013";
+              font-family: 'Glyphicons Halflings';
+              font-size: 9px;
+              float: left;
+              margin-top: 4px;
+              margin-left: -17px;
+          }
+          .modal img{
+            width:100%;
+          }
+          .modal .modal-header h2{
+            display:inline;
+          }
+          .modal .modal-header button{
+            font-size: 30px;
+          }
+        </style>
+
         <!-- React -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
         <script type="text/babel">
 
+            class DrinkDetail extends React.Component {
+
+              render() {
+                return (
+                  <div className="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h2 className="modal-title" id="drink_modal">{this.props.name}</h2>
+                          <button type="className" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <div className="container col-md-12">
+                              <div className="row">
+                                  <div className="col-md-6">
+                                      <img src={this.props.image}/>
+                                  </div>
+                                   <div className="col-md-6">
+                                       <p>{this.props.description}</p>
+                                       <ul>
+                                         {this.props.ingredient_list}
+                                       </ul>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                          <button type="button" className="btn btn-primary">Make Drink</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+
+
+            }
+
             class Drink extends React.Component {
 
               render() {
-
                 var imgStyle = {
                   zIndex: "2",
                   position: "relative"
@@ -176,18 +227,42 @@
 
                 // Stores recipe list
                 this.recipe_list = []
+
+                this.drink = {
+                  name : "MyName",
+                  image : "MyImage",
+                  description : "MyDescription",
+                  ingredient_list : []
+                }
               }
 
               showModal(index) {
+
+
                 // Generate modal
                 var item = this.recipe_list[index]
-                $("#drink_modal .modal-title").text(item.name);
-                $("#drink_modal .modal-body img").attr('src', item.image);
-                $("#drink_modal .modal-body p").text(item.description);
+                this.drink.name = item.name
+                this.drink.image = item.image
+                this.drink.description = item.description
+                var ingredient_array = []
+                this.drink.ingredient_list = []
+                item.ingredient_list.forEach( (item, index) => {
+                  ingredient_array.push(item.size + ' ml of ' + item.name)
+                });
+
+                this.drink.ingredient_list = ingredient_array.map((item) => <li>{item}</li> );
+                /*
                 $("#drink_modal .modal-body ul").empty();
                 item.ingredient_list.forEach( (item, index) => {
                    $("#drink_modal .modal-body ul").append('<li>' + item.size + ' ml of ' + item.name + '</li>');
                 });
+                /**/
+
+                // Re-reder component
+                this.forceUpdate()
+                /**/
+
+                // Show modal
                 $("#drink_modal").modal();
               }
 
@@ -206,7 +281,11 @@
                      // Clear item list and redo
                      this.item_list = []
                      res.body.forEach( (item, index) => {
-                        this.item_list.push(<Drink index={index} name={item.name} image={item.image} description={item.description} onClick={this.showModal}/>)
+                        this.item_list.push(<Drink index={index}
+                                                    name={item.name}
+                                                    image={item.image}
+                                                    description={item.description}
+                                                    onClick={this.showModal}/>)
                      });
 
                      // Force render() to be called
@@ -217,6 +296,10 @@
               }
 
               render() {
+/*
+                const ingredient_array = ["Ingredient1", "Ingredient2", "Ingredient3"];
+                const ingredient_list = ingredient_array.map((item) => <li>{item}</li> );
+
                 return (
                   <div className="container">
                     <div className="row">
@@ -229,8 +312,34 @@
                       {this.item_list[4]}
                       {this.item_list[5]}
                     </div>
+                    <DrinkDetail name="MyName"
+                                 image="MyImage"
+                                 description="MyDescription"
+                                 ingredient_list={ingredient_list} />
                   </div>
                 )
+/**/
+
+
+                return (
+                  <div className="container">
+                    <div className="row">
+                      {this.item_list[0]}
+                      {this.item_list[1]}
+                      {this.item_list[2]}
+                    </div>
+                    <div className="row">
+                      {this.item_list[3]}
+                      {this.item_list[4]}
+                      {this.item_list[5]}
+                    </div>
+                    <DrinkDetail name={this.drink.name}
+                                 image={this.drink.image}
+                                 description={this.drink.description}
+                                 ingredient_list={this.drink.ingredient_list} />
+                  </div>
+                )
+                /**/
               }
             }
 
