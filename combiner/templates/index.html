@@ -71,40 +71,6 @@
           </div><!-- /#page -->
 
 
-          <!-- Modal -->
-          <!-- <div class="modal fade" id="drink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title" id="drink_modal" style="display:inline"></h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:30px">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="container col-md-12">
-                      <div class="row">
-                          <div class="col-md-6">
-                              <img src="" style="width:100%"/>
-                          </div>
-                           <div class="col-md-6">
-                               <p></p>
-                               <ul>
-                                 <li></li>
-                               </ul>
-                           </div>
-                       </div>
-                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Make Drink</button>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-
         <!--=== Load JS here for greater good ====-->
         <script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -142,6 +108,9 @@
           .modal .modal-header button{
             font-size: 30px;
           }
+          .modal .modal-footer button{
+            width: 15%;
+          }
         </style>
 
         <!-- React -->
@@ -150,9 +119,59 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
         <script type="text/babel">
 
+            var DrinkProgressEnum = {
+              PENDING: 1,
+              ONGOING: 2,
+              DONE: 3,
+            };
             class DrinkDetail extends React.Component {
 
+              constructor(props){
+                super(props)
+
+
+                // Create property to be passed to
+                this.drink_start_handler = this.drink_start_handler.bind(this);
+                this.drink_done_handler = this.drink_done_handler.bind(this);
+                this.state = {
+                  drink_generation : this.props.drink_generation
+                }
+
+
+              }
+
+
+              drink_start_handler(){
+                this.setState({
+                  drink_generation : DrinkProgressEnum.ONGOING
+                })
+
+                // Simulate message to Backend
+                setTimeout(this.drink_done_handler, 2000)
+              }
+
+              drink_done_handler(){
+                this.setState({
+                   drink_generation : DrinkProgressEnum.DONE
+                 })
+              }
+
               render() {
+                var button_content = ""
+                var button_class = "btn btn-primary"
+                switch(this.state.drink_generation) {
+                    case DrinkProgressEnum.DONE:
+                        button_content = "DONE!"
+                        button_class = "btn btn-success"
+                        break;
+                    case DrinkProgressEnum.ONGOING:
+                        button_content = <i className="fa fa-spinner fa-spin"></i>
+                        break;
+                    default:
+                        button_content = "Make Drink"
+                }
+
+
                 return (
                   <div className="modal fade" id="drink_modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
@@ -164,23 +183,23 @@
                           </button>
                         </div>
                         <div className="modal-body">
-                          <div className="container col-md-12">
-                              <div className="row">
-                                  <div className="col-md-6">
-                                      <img src={this.props.image}/>
-                                  </div>
-                                   <div className="col-md-6">
-                                       <p>{this.props.description}</p>
-                                       <ul>
-                                         {this.props.ingredient_list}
-                                       </ul>
-                                   </div>
-                               </div>
-                           </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <img src={this.props.image}/>
+                                </div>
+                                 <div className="col-md-6">
+                                     <p>{this.props.description}</p>
+                                     <ul>
+                                       {this.props.ingredient_list}
+                                     </ul>
+                                 </div>
+                             </div>
                         </div>
                         <div className="modal-footer">
                           <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                          <button type="button" className="btn btn-primary">Make Drink</button>
+                          <button type="button" className={button_class} onClick={this.drink_start_handler}>
+                            {button_content}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -286,30 +305,9 @@
               }
 
               render() {
-/*
-                const ingredient_array = ["Ingredient1", "Ingredient2", "Ingredient3"];
-                const ingredient_list = ingredient_array.map((item) => <li>{item}</li> );
 
-                return (
-                  <div className="container">
-                    <div className="row">
-                      {this.item_list[0]}
-                      {this.item_list[1]}
-                      {this.item_list[2]}
-                    </div>
-                    <div className="row">
-                      {this.item_list[3]}
-                      {this.item_list[4]}
-                      {this.item_list[5]}
-                    </div>
-                    <DrinkDetail name="MyName"
-                                 image="MyImage"
-                                 description="MyDescription"
-                                 ingredient_list={ingredient_list} />
-                  </div>
-                )
-/**/
-
+                console.log("Rerednd -->")
+                var drink_generation = DrinkProgressEnum.PENDING
 
                 return (
                   <div className="container">
@@ -326,10 +324,10 @@
                     <DrinkDetail name={this.drink.name}
                                  image={this.drink.image}
                                  description={this.drink.description}
-                                 ingredient_list={this.drink.ingredient_list} />
+                                 ingredient_list={this.drink.ingredient_list}
+                                 drink_generation={drink_generation} />
                   </div>
                 )
-                /**/
               }
             }
 
