@@ -238,7 +238,6 @@
 
               showModal(index) {
 
-
                 // Generate modal
                 var item = this.recipe_list[index]
                 this.drink.name = item.name
@@ -247,20 +246,12 @@
                 var ingredient_array = []
                 this.drink.ingredient_list = []
                 item.ingredient_list.forEach( (item, index) => {
-                  ingredient_array.push(item.size + ' ml of ' + item.name)
+                  var text = item.size + ' ml of ' + item.name
+                  this.drink.ingredient_list.push( <li>{text}</li>)
                 });
-
-                this.drink.ingredient_list = ingredient_array.map((item) => <li>{item}</li> );
-                /*
-                $("#drink_modal .modal-body ul").empty();
-                item.ingredient_list.forEach( (item, index) => {
-                   $("#drink_modal .modal-body ul").append('<li>' + item.size + ' ml of ' + item.name + '</li>');
-                });
-                /**/
 
                 // Re-reder component
                 this.forceUpdate()
-                /**/
 
                 // Show modal
                 $("#drink_modal").modal();
