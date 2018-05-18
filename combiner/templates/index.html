@@ -104,16 +104,11 @@
                            <div class="col-md-6">
                                <p></p>
                                <ul>
-                                 <li>Dry Vermouth</li>
-                                 <li>Bitter Orange</li>
+                                 <li></li>
                                </ul>
                            </div>
                        </div>
                    </div>
-
-
-                  <!-- <img src="http://elronpremiumdevenezuela.com/wp-content/uploads/el_mojito.png" style="width:100%"/>
-                  <p>Learn how to make Mojitos with Jamie Oliver's Drinks Tube & Bacardi. Follow our step-by-step mojito recipe for a refreshing summer cocktail.</p> -->
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -186,10 +181,6 @@
               showModal(index) {
                 // Generate modal
                 var item = this.recipe_list[index]
-
-
-                console.log("ITEM -> " + JSON.stringify(item))
-
                 $("#drink_modal .modal-title").text(item.name);
                 $("#drink_modal .modal-body img").attr('src', item.image);
                 $("#drink_modal .modal-body p").text(item.description);
