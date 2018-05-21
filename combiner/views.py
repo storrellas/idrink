@@ -3,14 +3,18 @@ from __future__ import unicode_literals
 
 import random
 
+# Django
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 
+# DRF includes
 from rest_framework import viewsets
 from rest_framework.response import Response
 
+
+# Project includes
 from combiner.models import Drink, Serving
 from combiner.serializers import DrinkSerializer
 from combiner.serializers import ServingCreateSerializer,ServingSerializer
