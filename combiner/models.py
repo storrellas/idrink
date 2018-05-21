@@ -26,3 +26,9 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=30)
     size = models.IntegerField()
     drink = models.ForeignKey(Drink, related_name='ingredient_list')
+
+class Serving(models.Model):
+    drink = models.ForeignKey(Drink, related_name='serving')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    completed = models.BooleanField(default=False)
