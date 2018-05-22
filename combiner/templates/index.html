@@ -136,25 +136,58 @@
                   drink_generation : this.props.drink_generation
                 }
 
+                this.serving = {
+                  id : 0
+                }
+                this.polling_timer = 1000
               }
               componentWillReceiveProps(nextProps){
-                console.log("componentWillReceiveProps" + JSON.stringify(nextProps))
+                //console.log("componentWillReceiveProps" + JSON.stringify(nextProps))
                 this.state.drink_generation = DrinkProgressEnum.PENDING
               }
 
               drink_start_handler(){
+
+                // Request to create Drink
+                superagent
+                  .post('/combiner/serving/')
+                  .send({ drink: this.props.id })
+                  .set('X-API-Key', 'foobar')
+                  .set('Accept', 'application/json')
+                  .then((res) => {
+                     // console.log("Setting Serving id to " + res.body.id)
+                     // console.log(JSON.stringify(res.body))
+                     this.serving.id = res.body.id
+                  });
+
                 this.setState({
                   drink_generation : DrinkProgressEnum.ONGOING
                 })
 
                 // Simulate message to Backend
-                setTimeout(this.drink_done_handler, 2000)
+                setTimeout(this.drink_done_handler, this.polling_timer)
               }
 
               drink_done_handler(){
-                this.setState({
-                   drink_generation : DrinkProgressEnum.DONE
-                 })
+
+                // Request to create Drink
+                superagent
+                  .get('/combiner/serving/' + this.serving.id + '/')
+                  .set('X-API-Key', 'foobar')
+                  .set('Accept', 'application/json')
+                  .then((res) => {
+                     //console.log("Getting state from  " + res.body.id)
+                     //console.log(JSON.stringify(res.body))
+                     if( res.body.completed ){
+                       // Change state and redraw
+                       this.setState({
+                          drink_generation : DrinkProgressEnum.DONE
+                        })
+                     }else{
+                       // Request again after a while
+                       setTimeout(this.drink_done_handler, this.polling_timer)
+                     }
+                  });
               }
 
               render() {
@@ -261,6 +294,7 @@
 
                 // Generate modal
                 var item = this.recipe_list[index]
+                this.drink.id = item.id
                 this.drink.name = item.name
                 this.drink.image = item.image
                 this.drink.description = item.description
@@ -320,7 +354,8 @@
                       {this.item_list[4]}
                       {this.item_list[5]}
                     </div>
-                    <DrinkDetail name={this.drink.name}
+                    <DrinkDetail id={this.drink.id}
+                                 name={this.drink.name}
                                  image={this.drink.image}
                                  description={this.drink.description}
                                  ingredient_list={this.drink.ingredient_list}/>
