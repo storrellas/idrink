@@ -59,9 +59,9 @@ class ServingViewSet(viewsets.ViewSet):
         # Fake MQTT
         Timer(5, self.drink_serving_completer).start()
 
-        # MQTT publish message
-        message = { 'id': 2, 'sender': 'sergi'}
-        publish.single("pumpcontroller/1/1", json.dumps(message))
+        # # MQTT publish message
+        # message = { 'id': 2, 'sender': 'pumpclient/1/1'}
+        # publish.single("pumpcontroller/1/1", json.dumps(message))
 
 
         # Generate response
