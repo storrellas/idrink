@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+# Python includes
 import random
+from threading import Timer
+import time
 
 # Django
 from django.shortcuts import render
@@ -38,6 +41,11 @@ class ServingViewSet(viewsets.ViewSet):
     """
     Viewset to get and create Servings
     """
+    def drink_serving_completer(self):
+        print "Updating all servings to True ... ", time.time()
+        Serving.objects.filter().update(completed=True)
+        #Timer(5, drink_serving_completer).start()
+
     def create(self, request):
 
         # Create Drink
@@ -45,6 +53,9 @@ class ServingViewSet(viewsets.ViewSet):
         serializer.is_valid()
         serving = Serving(drink_id=serializer.validated_data['drink'])
         serving.save()
+
+        # Fake MQTT
+        Timer(5, self.drink_serving_completer).start()
 
         # Generate response
         serializer = ServingSerializer(serving)
