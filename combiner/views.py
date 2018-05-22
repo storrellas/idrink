@@ -2,9 +2,8 @@
 from __future__ import unicode_literals
 
 # Python includes
-import random
+import random, time, json
 from threading import Timer
-import time
 
 # Django
 from django.shortcuts import render
@@ -15,6 +14,9 @@ from django.views.generic.list import ListView
 # DRF includes
 from rest_framework import viewsets
 from rest_framework.response import Response
+
+#import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
 
 
 # Project includes
@@ -56,6 +58,11 @@ class ServingViewSet(viewsets.ViewSet):
 
         # Fake MQTT
         Timer(5, self.drink_serving_completer).start()
+
+        # MQTT publish message
+        message = { 'id': 2, 'sender': 'sergi'}
+        publish.single("pumpcontroller/1/1", json.dumps(message))
+
 
         # Generate response
         serializer = ServingSerializer(serving)
