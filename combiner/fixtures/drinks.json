@@ -48,7 +48,7 @@
   "model": "combiner.drink",
   "pk": 6,
   "fields": {
-    "name": "Horse’s neck",
+    "name": "Horse's neck",
     "description": "This simple but gorgeous whisky cocktail will warm you from the moment it hits your lips.",
     "image" : "https://search.chow.com/thumbnail/800/600/www.chowstatic.com/assets/recipe_photos/10051_mimosa.jpg"
   }
