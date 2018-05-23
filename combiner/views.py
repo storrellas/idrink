@@ -57,12 +57,11 @@ class ServingViewSet(viewsets.ViewSet):
         serving.save()
 
         # Fake MQTT
-        Timer(5, self.drink_serving_completer).start()
+        #Timer(5, self.drink_serving_completer).start()
 
-        # # MQTT publish message
-        # message = { 'id': 2, 'sender': 'pumpclient/1/1'}
-        # publish.single("pumpcontroller/1/1", json.dumps(message))
-
+        # MQTT publish message
+        message = { 'id': serving.id, 'sender': 'pumpclient/1/1'}
+        publish.single("pumpcontroller/1/1", json.dumps(message))
 
         # Generate response
         serializer = ServingSerializer(serving)

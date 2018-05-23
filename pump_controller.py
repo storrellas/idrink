@@ -1,6 +1,14 @@
 import paho.mqtt.client as mqtt
 import time,json
 
+
+import os
+# django project name is adleads, replace adleads with your project name
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "idrink.settings")
+import django
+django.setup()
+from combiner.models import Serving
+
 # Configuration values
 pump_controller_id = 1
 pump_id = 1
@@ -16,26 +24,20 @@ def on_connect(client, userdata, flags, rc):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print("topic:" + msg.topic + " payload:"+str(msg.payload))
-    print("Replying message ...")
-
-    # Get sender
-    message_json = json.loads(msg.payload)
-    print(message_json['id'])
-    print(message_json['sender'])
+    print("topic: '" + msg.topic + "'' payload: '" + str(msg.payload) + "'")
 
     # Simulate operation here
+    print("Generating drink ...")
     time.sleep(response_delay)
     print("Done!")
 
-    # Generate reply
-    reply_json = {}
-    reply_json['id'] = message_json['id']
-    reply_json['status'] = 'OK'
+    # Get sender
+    message_json = json.loads(msg.payload)
 
-    # Generate response
-    (rc, mid) = client.publish(message_json['sender'], msg.topic + " terminated")
-
+    # Updating all elements
+    serving = Serving.objects.get(id=message_json['id'])
+    serving.completed = True
+    serving.save()
 
 
 client = mqtt.Client()
