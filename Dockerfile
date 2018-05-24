@@ -1,7 +1,10 @@
-FROM python:2.7.15
+#Grab the latest alpine image
+FROM alpine:latest
+
 MAINTAINER Sergi Torrellas
 
 # Add folder
+RUN apk add --no-cache --update python py-pip bash
 ADD . /repo/
 WORKDIR /repo/
 RUN pip install -r requirements.txt

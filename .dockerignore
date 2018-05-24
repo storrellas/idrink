@@ -1,1 +1,4 @@
+.git/
 venv
+idrink/localsettings.py*
+db.sqlite3
