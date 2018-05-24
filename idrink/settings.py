@@ -25,7 +25,7 @@ SECRET_KEY = 'zt&tdub$-ni9w=dz@d$+x*9eunttidr*5j*1ct7p#f77ne2706'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['idrinkgenerator.herokuapp.com','localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
