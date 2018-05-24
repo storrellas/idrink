@@ -5,8 +5,8 @@
 
 1. User walks up to machine and selects drink from UI. The UI will need to pull the drinks and ingredients from a local database as well as a remote API. If a drink is chosen and not in the local DB, then we should save the newly requested drink to the database.
 2. User selects size of drink
-3.  Machine then starts issuing MQTT messages to the local broker
- - Messages are meant to signal to another device that can control 24v relays. The message topic would look something like this: device/drinkID/timeInSecondsToActivateRelay. There can be any number of devices and drinks. The time to run each relay is a proportion to the size the user selected. The DB should hold the recipes.
+3. Machine then starts issuing MQTT messages to the local broker
+   - Messages are meant to signal to another device that can control 24v relays. The message topic would look something like this: device/drinkID/timeInSecondsToActivateRelay. There can be any number of devices and drinks. The time to run each relay is a proportion to the size the user selected. The DB should hold the recipes.
 4. The remote devices would then send a message back as they complete activation of the relays
 5. UI shows the user that the drink is complete and returns to the main screen
 
@@ -21,6 +21,7 @@ DrinkAPI refers to public API for controlling the drink machine using library pa
 PostgresSQL corresponds to database storing information about ingredients and drinks
 LocalBroker is the entity receiving messages from DrinkAPI to control drink machine
 
+```
 @startuml
 
 title iDrink
@@ -39,13 +40,14 @@ DrinkAPI -down-> LocalBroker : MQTT
 DrinkAPI -down-> PostgreSQL
 
 @enduml
+```
 
 ### Interaction Diagram: Drink Request
 
 Here below the interaction between actors when requesting a new drink:
 
 
-
+```
 @startuml
 
 title Drink Request
@@ -65,11 +67,12 @@ deactivate DrinkAPI
 @enduml
 
 ### MQTT
+```
 
 MQTT is a machine-to-machine (M2M)/"Internet of Things" connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. For example, it has been used in sensors communicating to a broker via satellite link, over occasional dial-up connections with healthcare providers, and in a range of home automation and small device scenarios. It is also ideal for mobile applications because of its small size, low power usage, minimised data packets, and efficient distribution of information to one or many receivers.
 
 
-
+```
 @startuml
 
 All the pump controllers are controlled by a PumpController device which are subscribed to a specific MQTT topics that control what specific pump to enable and for how long. From the DrinkAPI perspective, it will be necessary to have a python-based client to communicate with the MQTT broker that will ultimately relay the message to the PumpController. The client used to send messages to the MQTT local broker will be the python library
@@ -100,6 +103,8 @@ PumpController2 -down-> Pump22
 PumpController2 -down-> Pump23
 
 @enduml
+```
+
 DrinkAPI will issuing the topic MQTT to the local broker in the following form:
 
 /drinkmachine/$PiNumber/$PumpNumber/$TimeInSeconds
