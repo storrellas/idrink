@@ -133,9 +133,9 @@ REST_FRAMEWORK = {
     )
 }
 
-# mongoengine
-import mongoengine
-mongoengine.connect('idrink')
+# # mongoengine
+# import mongoengine
+# mongoengine.connect('idrink')
 
 # Import localsettings if any
 try:
