@@ -3,12 +3,12 @@
 
 ## Requirements
 
-1 - User walks up to machine and selects drink from UI. The UI will need to pull the drinks and ingredients from a local database as well as a remote API. If a drink is chosen and not in the local DB, then we should save the newly requested drink to the database.
-2 - User selects size of drink
-3 - Machine then starts issuing MQTT messages to the local broker
-3a - Messages are meant to signal to another device that can control 24v relays. The message topic would look something like this: device/drinkID/timeInSecondsToActivateRelay. There can be any number of devices and drinks. The time to run each relay is a proportion to the size the user selected. The DB should hold the recipes.
-4 - The remote devices would then send a message back as they complete activation of the relays
-5 - UI shows the user that the drink is complete and returns to the main screen
+1. User walks up to machine and selects drink from UI. The UI will need to pull the drinks and ingredients from a local database as well as a remote API. If a drink is chosen and not in the local DB, then we should save the newly requested drink to the database.
+2. User selects size of drink
+3.  Machine then starts issuing MQTT messages to the local broker
+ - Messages are meant to signal to another device that can control 24v relays. The message topic would look something like this: device/drinkID/timeInSecondsToActivateRelay. There can be any number of devices and drinks. The time to run each relay is a proportion to the size the user selected. The DB should hold the recipes.
+4. The remote devices would then send a message back as they complete activation of the relays
+5. UI shows the user that the drink is complete and returns to the main screen
 
 ## Design
 
