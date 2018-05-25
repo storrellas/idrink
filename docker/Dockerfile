@@ -3,9 +3,6 @@ FROM alpine:latest
 
 MAINTAINER Sergi Torrellas
 
-ARG http_proxy=http://barc.proxy.corp.sopra:8080/
-ARG https_proxy=http://barc.proxy.corp.sopra:8080/
-
 # Add folder
 RUN apk add --no-cache --update python py-pip bash
 ADD . /repo/
