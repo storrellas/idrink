@@ -19,7 +19,7 @@ version: "3"
 services:
   idrink:
     image: idrink
-    restart: always
+    #restart: always
     tty: true
     build:
       context: ..
