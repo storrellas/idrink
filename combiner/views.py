@@ -44,7 +44,7 @@ class ServingViewSet(viewsets.ViewSet):
     Viewset to get and create Servings
     """
     def drink_serving_completer(self):
-        print "Updating all servings to True ... ", time.time()
+        print( "Updating all servings to True ... ", time.time() )
         Serving.objects.filter().update(completed=True)
         #Timer(5, drink_serving_completer).start()
 
