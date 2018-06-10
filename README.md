@@ -137,11 +137,12 @@ https://wireframepro.mockflow.com/view/idrink
 
 ## Deployment
 
-apt-get install mosquitto
+apt-get update
+apt-get install -y mosquitto git
 git clone https://github.com/claughinghouse/idrink.git
 cd idrink
 -- Only if virtualenv required --
-python -v venv ./venv3/
+python -m venv ./venv3/
 source ./venv3/bin/activate
 -- Only if virtualenv required --
 pip install -r requirements3_sqlite.txt
