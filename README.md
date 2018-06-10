@@ -135,6 +135,21 @@ You can download the envisaged HTML template from [here](https://github.com/stor
 Wireframes
 https://wireframepro.mockflow.com/view/idrink
 
+## Deployment
+
+apt-get install mosquitto
+git clone https://github.com/claughinghouse/idrink.git
+cd idrink
+-- Only if virtualenv required --
+python -v venv ./venv3/
+source ./venv3/bin/activate
+-- Only if virtualenv required --
+pip install -r requirements3_sqlite.txt
+python manage.py makemigrations combiner
+python manage.py migrate
+python manage.py loaddata drinks ingredients
+python /repo/pump_controller.py & python /repo/manage.py runserver 0.0.0.0:80
+
 ## References
 
 https://github.com/claughinghouse/drink-machine/blob/master/Requirements.md
