@@ -137,19 +137,18 @@ https://wireframepro.mockflow.com/view/idrink
 
 ## Deployment
 
-apt-get update
-apt-get install -y mosquitto git
-git clone https://github.com/claughinghouse/idrink.git
-cd idrink
--- Only if virtualenv required --
-python -m venv ./venv3/
-source ./venv3/bin/activate
--- Only if virtualenv required --
-pip install -r requirements3_sqlite.txt
-python manage.py makemigrations combiner
-python manage.py migrate
-python manage.py loaddata drinks ingredients
-python /repo/pump_controller.py & python /repo/manage.py runserver 0.0.0.0:80
+- apt-get update
+- apt-get install -y mosquitto git
+- git clone https://github.com/claughinghouse/idrink.git
+- cd idrink
+- Only if virtualenv required --
+  - python -m venv ./venv3/
+  - source ./venv3/bin/activate
+- pip install -r requirements3_sqlite.txt
+- python manage.py makemigrations combiner
+- python manage.py migrate
+- python manage.py loaddata drinks ingredients
+- python /repo/pump_controller.py & python /repo/manage.py runserver 0.0.0.0:80
 
 ## References
 
