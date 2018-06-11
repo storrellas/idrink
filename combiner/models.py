@@ -25,10 +25,10 @@ class Drink(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=30)
     size = models.IntegerField()
-    drink = models.ForeignKey(Drink, related_name='ingredient_list')
+    drink = models.ForeignKey(Drink, related_name='ingredient_list', on_delete=models.CASCADE)
 
 class Serving(models.Model):
-    drink = models.ForeignKey(Drink, related_name='serving')
+    drink = models.ForeignKey(Drink, related_name='serving', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)

@@ -32,7 +32,7 @@ class DrinkViewSet(viewsets.ViewSet):
     Retrieve current drinks in DB
     """
     def list(self, request):
-        count = self.request.query_params.get('count')
+        count = int(self.request.query_params.get('count'))
         queryset = Drink.objects.all()[:count]  # Limiting number of elements if any
         queryset = sorted(queryset, key=lambda x: random.random())
         serializer = DrinkSerializer(queryset, many=True)
@@ -44,7 +44,7 @@ class ServingViewSet(viewsets.ViewSet):
     Viewset to get and create Servings
     """
     def drink_serving_completer(self):
-        print "Updating all servings to True ... ", time.time()
+        print( "Updating all servings to True ... ", time.time() )
         Serving.objects.filter().update(completed=True)
         #Timer(5, drink_serving_completer).start()
 
