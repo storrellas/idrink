@@ -137,18 +137,26 @@ https://wireframepro.mockflow.com/view/idrink
 
 ## Deployment
 
-- apt-get update
-- apt-get install -y mosquitto git
-- git clone https://github.com/claughinghouse/idrink.git
-- cd idrink
-- Only if virtualenv required --
+The following instructions were tested under docker container debian:jessie (https://hub.docker.com/_/debian/)
+
+- Install dependencies
+  - apt-get update
+  - apt-get install -y mosquitto git python3 python3-pip net-tools
+- Clone repository
+  - git clone https://github.com/claughinghouse/idrink.git
+- Cd into repository created
+  - cd idrink
+- Do next steps only when requiring virtualenv (http://docs.python-guide.org/en/latest/dev/virtualenvs/)
   - python -m venv ./venv3/
   - source ./venv3/bin/activate
-- pip install -r requirements3_sqlite.txt
-- python manage.py makemigrations combiner
-- python manage.py migrate
-- python manage.py loaddata drinks ingredients
-- python /repo/pump_controller.py & python /repo/manage.py runserver 0.0.0.0:80
+- Install Python dependencies
+  - pip3 install -r requirements3_sqlite.txt
+- Generate django models and apply fixtures
+  - python3 manage.py makemigrations combiner
+  - python3 manage.py migrate
+  - python3 manage.py loaddata drinks ingredients
+- Start both pump_controller (simulator of pump subscriber) and runserver (start web application)
+  - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:80
 
 ## References
 
