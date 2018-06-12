@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
+from django.conf import settings
 
 # DRF includes
 from rest_framework import viewsets
@@ -61,7 +62,7 @@ class ServingViewSet(viewsets.ViewSet):
 
         # MQTT publish message
         message = { 'id': serving.id, 'sender': 'pumpclient/1/1'}
-        publish.single("pumpcontroller/1/1", json.dumps(message))
+        publish.single("pumpcontroller/1/1", json.dumps(message), hostname=settings.MQTT['hostname'])
 
         # Generate response
         serializer = ServingSerializer(serving)

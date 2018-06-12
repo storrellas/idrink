@@ -137,6 +137,10 @@ REST_FRAMEWORK = {
 # import mongoengine
 # mongoengine.connect('idrink')
 
+MQTT = {
+    'hostname': 'localhost'
+}
+
 # Import localsettings if any
 try:
     from .localsettings import *
