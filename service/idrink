@@ -16,7 +16,7 @@ PIDFILE=/var/run/$NAME.pid
 LOGFILE=/var/log/$NAME.log
 
 start() {
-  if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
     echo 'Service already running' >&2
     return 1
   fi
@@ -32,9 +32,8 @@ stop() {
     return 1
   fi
   echo 'Stopping service…' >&2
-  #kill -9 $(cat "$PIDFILE") && rm -f "$PIDFILE"
-  rm -f "$PIDFILE"
-  pkill -f $NAME
+  pkill -P $(cat "$PIDFILE")
+  kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE"
   echo 'Service stopped' >&2
 }
 
