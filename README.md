@@ -141,13 +141,13 @@ The following instructions were tested under docker container debian:jessie (htt
 
 - Install dependencies
   - apt-get update
-  - apt-get install -y mosquitto git python3 python3-pip net-tools
+  - apt-get install -y mosquitto git python3 python3-pip python3-venv net-tools
 - Clone repository
   - git clone https://github.com/claughinghouse/idrink.git
 - Cd into repository created
   - cd idrink
 - Do next steps only when requiring virtualenv (http://docs.python-guide.org/en/latest/dev/virtualenvs/)
-  - python -m venv ./venv3/
+  - python3 -m venv ./venv3/
   - source ./venv3/bin/activate
 - Install Python dependencies
   - pip3 install -r requirements3_sqlite.txt
