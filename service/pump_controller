@@ -8,10 +8,10 @@
 # Description:       <DESCRIPTION>
 ### END INIT INFO
 
-SCRIPT=/vagrant/workspace/idrink/runserver.sh
+SCRIPT=/vagrant/workspace/idrink/runpump.sh
 RUNAS=root
 
-NAME=idrink
+NAME=pump_controller
 PIDFILE=/var/run/$NAME.pid
 LOGFILE=/var/log/$NAME.log
 
