@@ -32,7 +32,7 @@ def on_message(client, userdata, msg):
     print("Done!")
 
     # Get sender
-    message_json = json.loads(msg.payload)
+    message_json = json.loads(msg.payload.decode("utf-8"))
 
     # Updating all elements
     serving = Serving.objects.get(id=message_json['id'])
