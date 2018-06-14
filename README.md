@@ -139,7 +139,7 @@ https://wireframepro.mockflow.com/view/idrink
 
 The following instructions were tested under docker container debian:jessie (https://hub.docker.com/_/debian/)
 
-### Install using SQLite:
+### Deployment using SQLite:
 
 - Install dependencies
   - apt-get update
@@ -161,7 +161,7 @@ The following instructions were tested under docker container debian:jessie (htt
   - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:80
 
 
-### Install using PostgreSQL:
+### Deployment using PostgreSQL:
 
   - Install dependencies
     - apt-get update
