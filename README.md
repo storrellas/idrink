@@ -139,6 +139,8 @@ https://wireframepro.mockflow.com/view/idrink
 
 The following instructions were tested under docker container debian:jessie (https://hub.docker.com/_/debian/)
 
+Install using SQLite:
+
 - Install dependencies
   - apt-get update
   - apt-get install -y mosquitto git python3 python3-pip python3-venv net-tools
@@ -157,6 +159,56 @@ The following instructions were tested under docker container debian:jessie (htt
   - python3 manage.py loaddata drinks ingredients
 - Start both pump_controller (simulator of pump subscriber) and runserver (start web application)
   - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:80
+
+
+  Install using PostgreSQL:
+
+  - Install dependencies
+    - apt-get update
+    - apt-get install -y mosquitto git python3 python3-pip python3-venv net-tools
+    - apt-get install -y postgresql postgresql-contrib python3-psycopg2 libpq-dev
+  - Start DB engine
+    - Edit file /etc/postgresql/9.4/main/pg_hba.conf
+      - Change the following line with contents to allow user to be logged with credentials
+```      
+local   all             all                                     md5
+```    
+    - /etc/init.d/postgresql restart
+    - Create databse idrink in PostgreSQL
+      - createdb idrink
+  - Configure idrink to use Postgres
+    - nano ./idrink/localsettings.py
+```    
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'idrink',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+```
+  - Configure DB
+    - sudo -u postgres psql postgres
+    - \password postgres (set the password for user postgres)
+  - Clone repository
+    - git clone https://github.com/claughinghouse/idrink.git
+  - Cd into repository created
+    - cd idrink
+  - Do next steps only when requiring virtualenv (http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+    - python3 -m venv ./venv3/
+    - source ./venv3/bin/activate
+  - Install Python dependencies
+    - pip3 install -r requirements3.txt
+  - Generate django models and apply fixtures
+    - python3 manage.py makemigrations combiner
+    - python3 manage.py migrate
+    - python3 manage.py loaddata drinks ingredients
+  - Start both pump_controller (simulator of pump subscriber) and runserver (start web application)
+    - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:80
+
 
 ## References
 
