@@ -177,7 +177,7 @@ local   all             all                                     md5
     - Create databse idrink in PostgreSQL
       - createdb idrink
   - Configure idrink to use Postgres
-    - nano ./idrink/localsettings.py
+    - Create file <project_root>/idrink/localsettings.py
 ```    
 DATABASES = {
     'default': {
@@ -190,9 +190,11 @@ DATABASES = {
     }
 }
 ```
-  - Configure DB
-    - sudo -u postgres psql postgres
-    - \password postgres (set the password for user postgres)
+  - Configure Pasword for user postgres
+    - Enter in PSQL prompt
+      - sudo -u postgres psql postgres
+    - Update postgres password
+      - \password postgres (set the password for user postgres)
   - Clone repository
     - git clone https://github.com/claughinghouse/idrink.git
   - Cd into repository created
