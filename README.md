@@ -158,7 +158,7 @@ The following instructions were tested under docker container debian:jessie (htt
   - python3 manage.py migrate
   - python3 manage.py loaddata drinks ingredients
 - Start both pump_controller (simulator of pump subscriber) and runserver (start web application)
-  - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:80
+  - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:8080
 
 
 ### Deployment using PostgreSQL:
@@ -209,7 +209,7 @@ DATABASES = {
     - python3 manage.py migrate
     - python3 manage.py loaddata drinks ingredients
   - Start both pump_controller (simulator of pump subscriber) and runserver (start web application)
-    - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:80
+    - python3 pump_controller.py & python3 manage.py runserver 0.0.0.0:8080
 
 
 ## References
