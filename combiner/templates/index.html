@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html><head>
         <meta charset="utf-8">
@@ -26,10 +27,7 @@
 
     </head>
 
-
-
     <body>
-
 
         <div id="page" class="page">
 
@@ -70,6 +68,8 @@
             </section>
           </div><!-- /#page -->
 
+          <!-- <div id="container"></div>
+          {% render_bundle 'main' %} -->
 
         <!--=== Load JS here for greater good ====-->
         <script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
@@ -116,6 +116,7 @@
         <!-- React -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
         <script type="text/babel">
 
@@ -204,10 +205,64 @@
                     default:
                         button_content = "Make Drink"
                 }
+/*
+                return (
+                  <ReactBootstrap.Modal show="true">
+                    <ReactBootstrap.Modal.Header closeButton>
+                      <ReactBootstrap.Modal.Title>Modal heading</ReactBootstrap.Modal.Title>
+                    </ReactBootstrap.Modal.Header>
+                    <ReactBootstrap.Modal.Body>
+                      <h4>Text in a modal</h4>
+                      <p>
+                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                      </p>
 
+                      <h4>Tooltips in a modal</h4>
+                      <p>
+                        there is a{' '}
+                        <ReactBootstrap.OverlayTrigger>
+                          <a href="#tooltip">tooltip</a>
+                        </ReactBootstrap.OverlayTrigger>
+                        here
+                      </p>
+
+                      <hr />
+
+                      <h4>Overflowing text to show scroll behavior</h4>
+                      <p>
+                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+                        ac consectetur ac, vestibulum at eros.
+                      </p>
+                    </ReactBootstrap.Modal.Body>
+                    <ReactBootstrap.Modal.Footer>
+                      <ReactBootstrap.Button onClick={this.handleClose}>Close</ReactBootstrap.Button>
+                    </ReactBootstrap.Modal.Footer>
+                  </ReactBootstrap.Modal>
+                )
+
+/*
+                return (
+                  <div className="static-modal">
+                    <ReactBootstrap.Modal.Dialog>
+                      <ReactBootstrap.Modal.Header>
+                        <ReactBootstrap.Modal.Title>Modal title</ReactBootstrap.Modal.Title>
+                      </ReactBootstrap.Modal.Header>
+
+                      <ReactBootstrap.Modal.Body>One fine body...</ReactBootstrap.Modal.Body>
+
+                      <ReactBootstrap.Modal.Footer>
+                        <ReactBootstrap.Button>Close</ReactBootstrap.Button>
+                        <ReactBootstrap.Button bsStyle="primary">Save changes</ReactBootstrap.Button>
+                      </ReactBootstrap.Modal.Footer>
+                    </ReactBootstrap.Modal.Dialog>
+                  </div>
+                )
+/**/
 
                 return (
                   <div className="modal fade" id="drink_modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <ReactBootstrap.Modal />
                     <div className="modal-dialog" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
@@ -239,6 +294,7 @@
                     </div>
                   </div>
                 )
+/**/
               }
 
 
@@ -367,64 +423,6 @@
 
             // Render Items
             ReactDOM.render( <DrinkMatrix />, document.getElementById('root'));
-        </script>
-
-
-        <!-- MQTT -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-        <script type="text/javascript">
-        /*
-            $( document ).ready(() => {
-                var mosquitto_host = "localhost"
-                var mosquitto_port = 9001
-
-                var pump_controller_id = 1
-                var pump_id = 1
-                var pumpclient_topic = "pumpclient/1/1"
-
-                // Create a client instance
-                client = new Paho.MQTT.Client(mosquitto_host, mosquitto_port, "clientId");
-
-                // set callback handlers
-                client.onConnectionLost = onConnectionLost;
-                client.onMessageArrived = onMessageArrived;
-
-                // connect the client
-                client.connect({onSuccess:onConnect});
-
-
-                // called when the client connects
-                function onConnect() {
-
-                  var message = {}
-                  message["id"] =  Math.floor( (Math.random() * 10000) )
-                  message["time_count"] = 5
-                  message["sender"] = pumpclient_topic
-
-                  // Once a connection has been made, make a subscription and send a message.
-                  console.log("onConnect");
-                  client.subscribe(pumpclient_topic);
-                  //message = new Paho.MQTT.Message("pumpdata");
-                  message = new Paho.MQTT.Message(JSON.stringify(message));
-                  message.destinationName = "pumpcontroller/" + pump_controller_id + "/" + pump_id;
-                  client.send(message);
-                }
-
-                // called when the client loses its connection
-                function onConnectionLost(responseObject) {
-                  if (responseObject.errorCode !== 0) {
-                    console.log("onConnectionLost:"+responseObject.errorMessage);
-                  }
-                }
-
-                // called when a message arrives
-                function onMessageArrived(message) {
-                  console.log("onMessageArrived:"+message.payloadString);
-                  alert("onMessageArrived:"+message.payloadString)
-                }
-
-            });
-            /**/
         </script>
 
 
