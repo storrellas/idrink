@@ -13,5 +13,5 @@ router.register(r'serving', views.ServingViewSet, base_name='serving')
 # Set URL patterns
 urlpatterns = []
 urlpatterns += router.urls
-urlpatterns += url('^react/', views.IndexView.as_view()),
+urlpatterns += url('^react/', views.ReactView.as_view()),
 urlpatterns += url('', views.IndexView.as_view()),

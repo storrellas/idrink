@@ -52,5 +52,9 @@ module.exports = {
         modules: ['node_modules'],
         //extensions that should be used to resolve modules
         extensions: ['.js', '.jsx']
+    },
+    watchOptions: {
+      poll: 1000 // Check for changes every second
     }
+
 }

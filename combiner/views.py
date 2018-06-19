@@ -28,7 +28,7 @@ from combiner.serializers import ServingCreateSerializer,ServingSerializer
 class IndexView(TemplateView):
     template_name = "index.html"
 
-class IndexView(TemplateView):
+class ReactView(TemplateView):
     template_name = "react.html"
 
 class DrinkViewSet(viewsets.ViewSet):
