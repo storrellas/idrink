@@ -17,7 +17,7 @@ pipenv==11.10.1
 prompt-toolkit==1.0.15
 psycopg2-binary==2.7.4
 ptyprocess==0.5.2
-Pygments==2.2.0
+Pygments==2.15.0
 pymongo==3.6.1
 pytz==2018.4
 simplegeneric==0.8.1
